@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Site extends Model
+class Endpoint extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = ['url'];
+    protected $fillable = ['endpoint', 'frequency', 'next_check'];
 
-    public function user(): BelongsTo
+    public function site(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Site::class);
     }
 
-    public function endpoints(): HasMany
+    public function checks(): HasMany
     {
-        return $this->hasMany(Endpoint::class);
+        return $this->hasMany(Check::class);
     }
 }
